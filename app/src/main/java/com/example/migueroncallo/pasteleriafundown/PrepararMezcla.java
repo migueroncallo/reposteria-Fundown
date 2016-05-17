@@ -137,7 +137,6 @@ public class PrepararMezcla extends Activity {
                     }
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    v.setBackgroundColor(Color.BLUE);
                     break;
             }
 
