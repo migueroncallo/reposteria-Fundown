@@ -36,7 +36,7 @@ public class Pasteleria extends Activity {
         registradora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Pasteleria.this, PrepararMezcla.class);
+                Intent intent = new Intent(Pasteleria.this, VenderCupcake.class);
                 startActivity(intent);
             }
         });

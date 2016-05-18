@@ -72,5 +72,51 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="1"
+        android:id="@+id/harinaCount"
+        android:layout_marginRight="20dp"
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/harinaImage"
+        android:layout_toLeftOf="@+id/harinaImage"
+        android:layout_toStartOf="@+id/harinaImage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="2"
+        android:id="@+id/mantequillaCount"
+        android:layout_marginRight="20dp"
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/mantequillarImage"
+        android:layout_toLeftOf="@+id/mantequillarImage"
+        android:layout_toStartOf="@+id/mantequillarImage" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="2"
+        android:id="@+id/huevoCount"
+        android:layout_marginRight="20dp"
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/huevoImage"
+        android:layout_toLeftOf="@+id/huevoImage"
+        android:layout_toStartOf="@+id/huevoImage" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="3"
+        android:id="@+id/aguaCount"
+        android:layout_marginRight="20dp"
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/aguaImage"
+        android:layout_toLeftOf="@+id/aguaImage"
+        android:layout_toStartOf="@+id/aguaImage" />
+
 
 </RelativeLayout>
