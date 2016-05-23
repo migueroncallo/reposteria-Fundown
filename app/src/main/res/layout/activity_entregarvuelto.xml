@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:id="@+id/relativeVuelto"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.migueroncallo.pasteleriafundown.entregarvuelto">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vueltoBackground"
+        android:src="@drawable/vueltofondo"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/cupSale"
+        android:layout_marginTop="240dp"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:id="@+id/manoCliente"
+        android:src="@drawable/manovuelto"
+        android:scaleType="fitXY"
+        android:layout_below="@id/cupSale"
+        android:layout_alignLeft="@id/cupSale"
+    />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/cajaValue"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="200dp"
+        android:layout_marginTop="140dp"
+        />
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="130dp"
+        android:id="@+id/billete2"
+        android:src="@drawable/billete2000"
+        android:scaleType="fitXY"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/cajaValue"
+        android:layout_marginRight="50dp"
+        />
+
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="130dp"
+        android:id="@+id/billete1"
+        android:src="@drawable/billete1000"
+        android:scaleType="fitXY"
+        android:layout_marginRight="150dp"
+        android:layout_alignTop="@+id/billete2"
+        android:layout_toLeftOf="@+id/billete2"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/moneda"
+        android:src="@drawable/moneda500"
+        android:scaleType="fitXY"
+        android:layout_marginTop="50dp"
+        android:layout_toLeftOf="@+id/billete2"
+        android:layout_below="@+id/billete2"
+        />
+
+
+
+</RelativeLayout>

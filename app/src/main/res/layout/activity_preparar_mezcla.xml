@@ -118,5 +118,14 @@
         android:layout_toLeftOf="@+id/aguaImage"
         android:layout_toStartOf="@+id/aguaImage" />
 
+    <ImageView
+        android:layout_width="600dp"
+        android:layout_height="450dp"
+        android:id="@+id/cupcakeCount"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/cupcakeuno"/>
+
 
 </RelativeLayout>

@@ -9,4 +9,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.migueroncallo.pasteleriafundown.VenderCupcake">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ventaBackground"
+        android:src="@drawable/ventafondo"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/cupVenta"
+        android:scaleType="fitXY"
+        android:layout_marginTop="245dp"/>
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        android:id="@+id/clientePago"
+        android:src="@drawable/pago5"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/cupVenta"
+        android:layout_alignLeft="@id/cupVenta"
+
+        />
 </RelativeLayout>
