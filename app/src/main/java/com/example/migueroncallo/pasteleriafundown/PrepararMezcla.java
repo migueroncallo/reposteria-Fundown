@@ -1,10 +1,9 @@
 package com.example.migueroncallo.pasteleriafundown;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,26 +19,18 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Random;
-
-import static com.example.migueroncallo.pasteleriafundown.R.drawable.cupcakeuno;
 
 public class PrepararMezcla extends Activity {
 
     TextView harina, mantequilla, huevo, agua;
     float posx = 0, posy = 0;
     int huevoCount = 0, huevoNeeded = 2, aguaCount = 0, aguaNeeded = 3, harinaCount = 0, harinaNeeded = 1, mantequillaCount = 0, mantequillaNeeded = 2, gameCount = 0;
-    ImageView img, cupcakeCount, tazon;
+    ImageView img, cupcakeCount, tazon,animationEgg;
     boolean huevoOk = false, aguaOk = false, harinaOk = false, mantequillaOk = false, gameFinished = false;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    AnimationDrawable anim,anim2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +40,15 @@ public class PrepararMezcla extends Activity {
         findViewById(R.id.relativeMezcla).setOnDragListener(new MyOnDragListener(1, false));
         tazon = (ImageView)findViewById(R.id.tazonImage);
         tazon.setOnDragListener(new MyOnDragListener(2, false));
-        findViewById(R.id.huevoImage).setOnLongClickListener(new MyOnLongClickListener(false));
-        findViewById(R.id.aguaImage).setOnLongClickListener(new MyOnLongClickListener(false));
-        findViewById(R.id.mantequillarImage).setOnLongClickListener(new MyOnLongClickListener(false));
-        findViewById(R.id.harinaImage).setOnLongClickListener(new MyOnLongClickListener(false));
+        findViewById(R.id.huevoImage).setOnTouchListener(new MyOnTouchListener(false));
+        findViewById(R.id.aguaImage).setOnTouchListener(new MyOnTouchListener(false));
+        findViewById(R.id.mantequillarImage).setOnTouchListener(new MyOnTouchListener(false));
+        findViewById(R.id.harinaImage).setOnTouchListener(new MyOnTouchListener(false));
+        animationEgg = (ImageView)findViewById(R.id.eggAnimation);
+
+        animationEgg.setBackgroundResource(R.drawable.animatedegg);
+        anim = (AnimationDrawable) animationEgg.getBackground();
+        animationEgg.setVisibility(View.INVISIBLE);
 
         harina = (TextView) findViewById(R.id.harinaCount);
         mantequilla = (TextView) findViewById(R.id.mantequillaCount);
@@ -94,18 +91,41 @@ public class PrepararMezcla extends Activity {
         }, 5000);
     }
 
+    public void animateEgg(){
+
+        animationEgg.setVisibility(View.VISIBLE);
+        anim.setVisible(true, true);
+
+        Handler h = new Handler();
+
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animationEgg.setVisibility(View.INVISIBLE);
+            }
+        },2500);
+
+    }
+
+    public void animateBowl(){
+        tazon.setImageDrawable(null);
+        tazon.setBackgroundResource(R.drawable.animatedbowl);
+        anim2 = (AnimationDrawable)tazon.getBackground();
+        anim2.start();
+    }
 
 
-    class MyOnLongClickListener implements View.OnLongClickListener {
+    class MyOnTouchListener implements View.OnTouchListener{
+
         boolean visible;
 
-        public MyOnLongClickListener(boolean visible) {
+        public MyOnTouchListener(boolean visible) {
             this.visible = visible;
         }
 
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
-        public boolean onLongClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
+
 
             img = (ImageView) findViewById(v.getId());
             posx = v.getX();
@@ -127,7 +147,6 @@ public class PrepararMezcla extends Activity {
         }
     }
 
-
     public void acceptRecipee(boolean egg, boolean water, boolean flour, boolean butter) {
 
         boolean finished = false;
@@ -138,7 +157,7 @@ public class PrepararMezcla extends Activity {
             harinaCount = 0;
             mantequillaCount = 0;
             Random r = new Random();
-            int multiplicador = r.nextInt(4 - 1) + 1;
+            final int multiplicador = r.nextInt(4 - 1) + 1;
 
             switch (multiplicador) {
                 case 1:
@@ -148,7 +167,16 @@ public class PrepararMezcla extends Activity {
                     int imageResource = getResources().getIdentifier(uri, null, getPackageName());
                     Drawable res = getResources().getDrawable(imageResource);
                     cupcakeCount.setImageDrawable(res);
-                    activityHint();
+
+                    Handler h = new Handler();
+
+                    h.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            activityHint();
+
+                        }
+                    }, 2000);
                     break;
 
                 case 2:
@@ -157,8 +185,15 @@ public class PrepararMezcla extends Activity {
                     int imageResource2 = getResources().getIdentifier(uri2, null, getPackageName());
                     Drawable res2 = getResources().getDrawable(imageResource2);
                     cupcakeCount.setImageDrawable(res2);
-                    activityHint();
-                    break;
+                    Handler h2 = new Handler();
+
+                    h2.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            activityHint();
+
+                        }
+                    }, 2000);                    break;
 
                 case 3:
 
@@ -167,7 +202,15 @@ public class PrepararMezcla extends Activity {
                     int imageResource3 = getResources().getIdentifier(uri3, null, getPackageName());
                     Drawable res3 = getResources().getDrawable(imageResource3);
                     cupcakeCount.setImageDrawable(res3);
-                    activityHint();
+                    Handler h3 = new Handler();
+
+                    h3.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            activityHint();
+
+                        }
+                    }, 2000);
                     break;
 
                 default:
@@ -176,16 +219,27 @@ public class PrepararMezcla extends Activity {
 
 //            Toast.makeText(PrepararMezcla.this, "Ahora vamos a preparar " + String.valueOf(multiplicador) + " cupcakes.", Toast.LENGTH_LONG).show();
 
+                Handler h = new Handler();
 
-            huevoNeeded = huevoNeeded * multiplicador;
-            aguaNeeded = aguaNeeded * multiplicador;
-            harinaNeeded = harinaNeeded * multiplicador;
-            mantequillaNeeded = mantequillaNeeded * multiplicador;
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-            harina.setText(String.valueOf(harinaNeeded));
-            mantequilla.setText(String.valueOf(mantequillaNeeded));
-            huevo.setText(String.valueOf(huevoNeeded));
-            agua.setText(String.valueOf(aguaNeeded));
+                        huevoNeeded = huevoNeeded * multiplicador;
+                        aguaNeeded = aguaNeeded * multiplicador;
+                        harinaNeeded = harinaNeeded * multiplicador;
+                        mantequillaNeeded = mantequillaNeeded * multiplicador;
+
+                        harina.setText(String.valueOf(harinaNeeded));
+                        mantequilla.setText(String.valueOf(mantequillaNeeded));
+                        huevo.setText(String.valueOf(huevoNeeded));
+                        agua.setText(String.valueOf(aguaNeeded));
+
+                    }
+                }, 1000);
+
+
+
 
 
             gameFinished = true;
@@ -209,17 +263,39 @@ public class PrepararMezcla extends Activity {
                 int imageResource = getResources().getIdentifier(uri, null, getPackageName());
                 Drawable res = getResources().getDrawable(imageResource);
                 cupcakeCount.setImageDrawable(res);
-                activityHint();
-//                Intent intent = new Intent(PrepararMezcla.this, Pasteleria.class);
-//                startActivity(intent);
 
-                finishActivity();
+                animateBowl();
+
+
+
+                Handler h = new Handler();
+
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        activityHint();
+
+                    }
+                }, 6000);
+
+                Handler h1 = new Handler();
+
+                h1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finishActivity();
+
+                    }
+                }, 9000);
+
 
             }
 
         }
 
     }
+
+
 
     class MyOnDragListener implements View.OnDragListener {
 
@@ -273,14 +349,19 @@ public class PrepararMezcla extends Activity {
                             if (huevoCount < huevoNeeded) {
 
                                 huevoCount++;
+                                huevo.setText(String.valueOf(huevoNeeded - huevoCount));
+                                YoYo.with(Techniques.ZoomIn).duration(1000).playOn(huevo);
+
+                                animateEgg();
+
+
+
+
                                 String uri = "@drawable/tazonmezcla";
 
                                 int imageResource = getResources().getIdentifier(uri, null, getPackageName());
                                 Drawable res = getResources().getDrawable(imageResource);
                                 tazon.setImageDrawable(res);
-
-
-                                huevo.setText(String.valueOf(huevoNeeded - huevoCount));
 
                                 if (huevoCount == huevoNeeded) {
                                     huevoOk = true;
@@ -299,6 +380,8 @@ public class PrepararMezcla extends Activity {
                             if (aguaCount < aguaNeeded) {
 
                                 aguaCount++;
+                                agua.setText(String.valueOf(aguaNeeded - aguaCount));
+                                YoYo.with(Techniques.ZoomIn).duration(1000).playOn(agua);
 
                                 String uri = "@drawable/tazonmezcla";
 
@@ -306,7 +389,6 @@ public class PrepararMezcla extends Activity {
                                 Drawable res = getResources().getDrawable(imageResource);
                                 tazon.setImageDrawable(res);
 
-                                agua.setText(String.valueOf(aguaNeeded - aguaCount));
                                 if (aguaCount == aguaNeeded) {
                                     aguaOk = true;
                                 }
@@ -323,7 +405,10 @@ public class PrepararMezcla extends Activity {
 
                             if (harinaCount < harinaNeeded) {
 
+
                                 harinaCount++;
+                                harina.setText(String.valueOf(harinaNeeded - harinaCount));
+                                YoYo.with(Techniques.ZoomIn).duration(1000).playOn(harina);
 
                                 String uri = "@drawable/tazonmezcla";
 
@@ -331,7 +416,6 @@ public class PrepararMezcla extends Activity {
                                 Drawable res = getResources().getDrawable(imageResource);
                                 tazon.setImageDrawable(res);
 
-                                harina.setText(String.valueOf(harinaNeeded - harinaCount));
                                 if (harinaCount == harinaNeeded) {
                                     harinaOk = true;
                                 }
@@ -349,7 +433,11 @@ public class PrepararMezcla extends Activity {
 
                             if (mantequillaCount < mantequillaNeeded) {
 
-                                mantequillaCount++;
+
+                                        mantequillaCount++;
+                                        mantequilla.setText(String.valueOf(mantequillaNeeded - mantequillaCount));
+                                        YoYo.with(Techniques.ZoomIn).duration(1000).playOn(mantequilla);
+
 
                                 String uri = "@drawable/tazonmezcla";
 
@@ -357,7 +445,6 @@ public class PrepararMezcla extends Activity {
                                 Drawable res = getResources().getDrawable(imageResource);
                                 tazon.setImageDrawable(res);
 
-                                mantequilla.setText(String.valueOf(mantequillaNeeded - mantequillaCount));
                                 if (mantequillaCount == mantequillaNeeded) {
                                     mantequillaOk = true;
                                 }

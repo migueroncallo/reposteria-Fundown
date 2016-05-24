@@ -1,16 +1,15 @@
 package com.example.migueroncallo.pasteleriafundown;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,9 +29,9 @@ public class EntregarVuelto extends Activity {
         venta = preferences.getInt("venta", 1);
         findViewById(R.id.manoCliente).setOnDragListener(new MyOnDragListener(1, false));
         findViewById(R.id.relativeVuelto).setOnDragListener(new MyOnDragListener(2, false));
-        findViewById(R.id.billete1).setOnLongClickListener(new MyOnLongClickListener(false));
-        findViewById(R.id.billete2).setOnLongClickListener(new MyOnLongClickListener(false));
-        findViewById(R.id.moneda).setOnLongClickListener(new MyOnLongClickListener(false));
+        findViewById(R.id.billete1).setOnTouchListener(new MyOnTouchListener(false));
+        findViewById(R.id.billete2).setOnTouchListener(new MyOnTouchListener(false));
+        findViewById(R.id.moneda).setOnTouchListener(new MyOnTouchListener(false));
         cupcake = (ImageView)findViewById(R.id.cupSale);
         caja = (ImageView)findViewById(R.id.cajaValue);
         saldo = (5000 - (venta*1000));
@@ -156,19 +155,19 @@ public class EntregarVuelto extends Activity {
         }
     }
 
-    class MyOnLongClickListener implements View.OnLongClickListener {
+    class MyOnTouchListener implements View.OnTouchListener{
+
         boolean visible;
 
-        public MyOnLongClickListener(boolean visible) {
+        public MyOnTouchListener(boolean visible) {
             this.visible = visible;
         }
 
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
-        public boolean onLongClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
+
 
             img = (ImageView) findViewById(v.getId());
-
 
             ClipData data = ClipData.newPlainText("simple text", "text");
 
@@ -184,6 +183,8 @@ public class EntregarVuelto extends Activity {
             return true;
         }
     }
+
+
 
     class MyOnDragListener implements View.OnDragListener {
 

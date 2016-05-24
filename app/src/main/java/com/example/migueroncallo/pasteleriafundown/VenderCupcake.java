@@ -3,9 +3,9 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -22,7 +22,6 @@ public class VenderCupcake extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vender_cupcake);
-
         cupcakeVenta = (ImageView)findViewById(R.id.cupVenta);
         pago = (ImageView)findViewById(R.id.clientePago);
 

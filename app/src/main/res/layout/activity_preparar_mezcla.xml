@@ -127,5 +127,12 @@
         android:scaleType="fitXY"
         android:src="@drawable/cupcakeuno"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eggAnimation"
+        android:layout_alignTop="@+id/tazonImage"
+        android:layout_alignRight="@+id/tazonImage" />
+
 
 </RelativeLayout>
