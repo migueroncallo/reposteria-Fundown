@@ -3,23 +3,23 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Random;
 
@@ -28,9 +28,11 @@ public class PrepararMezcla extends Activity {
     TextView harina, mantequilla, huevo, agua;
     float posx = 0, posy = 0;
     int huevoCount = 0, huevoNeeded = 2, aguaCount = 0, aguaNeeded = 3, harinaCount = 0, harinaNeeded = 1, mantequillaCount = 0, mantequillaNeeded = 2, gameCount = 0;
-    ImageView img, cupcakeCount, tazon,animationEgg;
+    ImageView img, cupcakeCount, tazon,animationEgg, animationCongrats;
+    ImageButton sonido, home;
     boolean huevoOk = false, aguaOk = false, harinaOk = false, mantequillaOk = false, gameFinished = false;
-    AnimationDrawable anim,anim2;
+    AnimationDrawable anim,anim2,anim3;
+    SharedPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,18 @@ public class PrepararMezcla extends Activity {
         findViewById(R.id.mantequillarImage).setOnTouchListener(new MyOnTouchListener(false));
         findViewById(R.id.harinaImage).setOnTouchListener(new MyOnTouchListener(false));
         animationEgg = (ImageView)findViewById(R.id.eggAnimation);
+        sonido = (ImageButton)findViewById(R.id.soundButtonPrepare);
+        home = (ImageButton)findViewById(R.id.homeButtonPrepare);
+        animationCongrats = (ImageView)findViewById(R.id.congratsAnimation);
+
 
         animationEgg.setBackgroundResource(R.drawable.animatedegg);
         anim = (AnimationDrawable) animationEgg.getBackground();
         animationEgg.setVisibility(View.INVISIBLE);
+
+        animationCongrats.setBackgroundResource(R.drawable.animatedcongrats);
+        anim3 = (AnimationDrawable) animationCongrats.getBackground();
+        animationCongrats.setVisibility(View.INVISIBLE);
 
         harina = (TextView) findViewById(R.id.harinaCount);
         mantequilla = (TextView) findViewById(R.id.mantequillaCount);
@@ -62,9 +72,46 @@ public class PrepararMezcla extends Activity {
 
         cupcakeCount = (ImageView) findViewById(R.id.cupcakeCount);
 
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
+        General.manageBackgroundMusic(isSoundActive);
+
+        if (isSoundActive) {
+            sonido.setImageResource(R.drawable.btn_sonido_on);
+        } else {
+            sonido.setImageResource(R.drawable.btn_sonido_off);
+        }
 //        Toast.makeText(PrepararMezcla.this,"Vamos a preparar un cupcake.", Toast.LENGTH_LONG).show();
 
         activityHint();
+
+
+        sonido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                appPreferences = PreferenceManager.getDefaultSharedPreferences(PrepararMezcla.this);
+                boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
+                if (isSoundActive){
+                    sonido.setImageResource(R.drawable.btn_sonido_off);
+                } else {
+                    sonido.setImageResource(R.drawable.btn_sonido_on);
+                }
+                isSoundActive = !isSoundActive;
+
+                SharedPreferences.Editor editor = appPreferences.edit();
+                editor.putBoolean("isSoundActive", isSoundActive);
+                editor.commit();
+                General.manageBackgroundMusic(isSoundActive);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -283,10 +330,23 @@ public class PrepararMezcla extends Activity {
                 h1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        finishActivity();
-
+                        animationCongrats.setVisibility(View.VISIBLE);
+                        anim3.setVisible(true, true);
                     }
                 }, 9000);
+
+                Handler h2 = new Handler();
+
+                h2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 15000);
+
+
+
+
 
 
             }
@@ -368,6 +428,7 @@ public class PrepararMezcla extends Activity {
                                 }
 
                             } else {
+                                YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                 Toast.makeText(PrepararMezcla.this, "Ya agregaste los huevos necesarios", Toast.LENGTH_LONG).show();
 
                             }
@@ -394,6 +455,7 @@ public class PrepararMezcla extends Activity {
                                 }
 
                             } else {
+                                YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                 Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de agua necesaria", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -421,6 +483,7 @@ public class PrepararMezcla extends Activity {
                                 }
 
                             } else {
+                                YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                 Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de harina necesaria", Toast.LENGTH_LONG).show();
                             }
 
@@ -450,6 +513,7 @@ public class PrepararMezcla extends Activity {
                                 }
 
                             } else {
+                                YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                 Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de mantequilla necesaria", Toast.LENGTH_LONG).show();
                             }
 

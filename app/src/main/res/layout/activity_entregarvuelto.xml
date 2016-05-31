@@ -79,6 +79,30 @@
         android:layout_below="@+id/billete2"
         />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeButtonChange"
+        android:src="@drawable/btn_home"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/soundButtonChange"
+        android:src="@drawable/btn_sonido_off"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/homeButtonChange"
+        android:layout_toEndOf="@+id/homeButtonChange" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/congratsAnimationChange"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
 
 </RelativeLayout>

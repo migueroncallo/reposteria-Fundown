@@ -7,12 +7,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <item android:name="android:windowEnableSplitTouch">
-            false
-        </item>
-        <item android:name="android:splitMotionEvents">
-            false</item>
+        android:theme="@style/NoActionBar">
+
+
 
         <activity
             android:name=".MainActivity"

@@ -134,5 +134,31 @@
         android:layout_alignTop="@+id/tazonImage"
         android:layout_alignRight="@+id/tazonImage" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeButtonPrepare"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/btn_home"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/soundButtonPrepare"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/btn_sonido_off"
+        android:layout_toRightOf="@+id/homeButtonPrepare"
+        android:layout_toEndOf="@+id/homeButtonPrepare" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/congratsAnimation"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+         />
+
 
 </RelativeLayout>

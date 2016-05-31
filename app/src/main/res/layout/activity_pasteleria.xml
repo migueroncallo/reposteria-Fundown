@@ -36,4 +36,22 @@
         android:layout_marginBottom="60dp"
         android:layout_alignParentRight="true"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeButton"
+        android:src="@drawable/btn_home"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/soundButton"
+        android:src="@drawable/btn_sonido_on"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/homeButton"
+        android:layout_toEndOf="@+id/homeButton" />
+
 </RelativeLayout>

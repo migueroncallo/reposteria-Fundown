@@ -4,21 +4,29 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 public class EntregarVuelto extends Activity {
 
-    SharedPreferences preferences;
+    SharedPreferences preferences, appPreferences;
     int venta,saldo;
-    ImageView cupcake,img,caja;
+    ImageView cupcake,img,caja,animatedCongrats;
+    ImageButton sonido, home;
+    AnimationDrawable anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +42,58 @@ public class EntregarVuelto extends Activity {
         findViewById(R.id.moneda).setOnTouchListener(new MyOnTouchListener(false));
         cupcake = (ImageView)findViewById(R.id.cupSale);
         caja = (ImageView)findViewById(R.id.cajaValue);
+        sonido = (ImageButton)findViewById(R.id.soundButtonChange);
+        home = (ImageButton)findViewById(R.id.homeButtonChange);
+        animatedCongrats = (ImageView)findViewById(R.id.congratsAnimationChange);
+        animatedCongrats.setVisibility(View.INVISIBLE);
+        animatedCongrats.setBackgroundResource(R.drawable.animatedcongrats);
+        anim = (AnimationDrawable)animatedCongrats.getBackground();
+
+
+
         saldo = (5000 - (venta*1000));
+
         assignValueCaja(saldo);
 
         assignCupcake(venta);
+
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
+        General.manageBackgroundMusic(isSoundActive);
+
+        if (isSoundActive) {
+            sonido.setImageResource(R.drawable.btn_sonido_on);
+        } else {
+            sonido.setImageResource(R.drawable.btn_sonido_off);
+        }
+
+        sonido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                appPreferences = PreferenceManager.getDefaultSharedPreferences(EntregarVuelto.this);
+                boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
+                if (isSoundActive){
+                    sonido.setImageResource(R.drawable.btn_sonido_off);
+                } else {
+                    sonido.setImageResource(R.drawable.btn_sonido_on);
+                }
+                isSoundActive = !isSoundActive;
+
+                SharedPreferences.Editor editor = appPreferences.edit();
+                editor.putBoolean("isSoundActive", isSoundActive);
+                editor.commit();
+                General.manageBackgroundMusic(isSoundActive);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 
@@ -75,12 +131,16 @@ public class EntregarVuelto extends Activity {
             Toast.makeText(EntregarVuelto.this, "Felicidades! Has entregado el cambio correctamente", Toast.LENGTH_SHORT).show();
             Handler h = new Handler();
 
+            animatedCongrats.setVisibility(View.VISIBLE);
+            anim.setVisible(true, true);
+
+
             h.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     finish();
                 }
-            }, 2000);
+            }, 5000);
 
         }
     }
@@ -240,6 +300,7 @@ public class EntregarVuelto extends Activity {
                                     saldo = saldo - 1000;
                                     assignValueCaja(saldo);
                                 }else{
+                                    YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                     Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -250,6 +311,7 @@ public class EntregarVuelto extends Activity {
                                     saldo = saldo - 2000;
                                     assignValueCaja(saldo);
                                 }else{
+                                    YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                     Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -259,6 +321,7 @@ public class EntregarVuelto extends Activity {
                                     saldo = saldo - 500;
                                     assignValueCaja(saldo);
                                 }else{
+                                    YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
                                     Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
