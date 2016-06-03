@@ -3,9 +3,11 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -33,12 +35,12 @@ public class PrepararMezcla extends Activity {
     boolean huevoOk = false, aguaOk = false, harinaOk = false, mantequillaOk = false, gameFinished = false;
     AnimationDrawable anim,anim2,anim3;
     SharedPreferences appPreferences;
+    General general;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preparar_mezcla);
-
         findViewById(R.id.relativeMezcla).setOnDragListener(new MyOnDragListener(1, false));
         tazon = (ImageView)findViewById(R.id.tazonImage);
         tazon.setOnDragListener(new MyOnDragListener(2, false));
@@ -321,6 +323,7 @@ public class PrepararMezcla extends Activity {
                     @Override
                     public void run() {
                         activityHint();
+                        Sonidos(R.raw.gamewin);
 
                     }
                 }, 6000);
@@ -411,6 +414,7 @@ public class PrepararMezcla extends Activity {
                                 huevoCount++;
                                 huevo.setText(String.valueOf(huevoNeeded - huevoCount));
                                 YoYo.with(Techniques.ZoomIn).duration(1000).playOn(huevo);
+                                Sonidos(R.raw.correct);
 
                                 animateEgg();
 
@@ -422,6 +426,8 @@ public class PrepararMezcla extends Activity {
                                 int imageResource = getResources().getIdentifier(uri, null, getPackageName());
                                 Drawable res = getResources().getDrawable(imageResource);
                                 tazon.setImageDrawable(res);
+                                Sonidos( R.raw.correct);
+
 
                                 if (huevoCount == huevoNeeded) {
                                     huevoOk = true;
@@ -443,6 +449,8 @@ public class PrepararMezcla extends Activity {
                                 aguaCount++;
                                 agua.setText(String.valueOf(aguaNeeded - aguaCount));
                                 YoYo.with(Techniques.ZoomIn).duration(1000).playOn(agua);
+                                Sonidos( R.raw.correct);
+
 
                                 String uri = "@drawable/tazonmezcla";
 
@@ -471,6 +479,8 @@ public class PrepararMezcla extends Activity {
                                 harinaCount++;
                                 harina.setText(String.valueOf(harinaNeeded - harinaCount));
                                 YoYo.with(Techniques.ZoomIn).duration(1000).playOn(harina);
+                                Sonidos( R.raw.correct);
+
 
                                 String uri = "@drawable/tazonmezcla";
 
@@ -500,6 +510,8 @@ public class PrepararMezcla extends Activity {
                                         mantequillaCount++;
                                         mantequilla.setText(String.valueOf(mantequillaNeeded - mantequillaCount));
                                         YoYo.with(Techniques.ZoomIn).duration(1000).playOn(mantequilla);
+                                Sonidos( R.raw.correct);
+
 
 
                                 String uri = "@drawable/tazonmezcla";
@@ -531,5 +543,22 @@ public class PrepararMezcla extends Activity {
 
             return true;
         }
+    }
+
+    public void Sonidos(int Sonido){
+
+        MediaPlayer mp = MediaPlayer.create(this, Sonido);
+
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.reset();
+                mp.release();
+                mp = null;
+            }
+
+        });
+        mp.start();
+
     }
 }

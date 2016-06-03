@@ -10,11 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.Random;
 import java.util.Timer;
@@ -48,6 +51,8 @@ public class Pasteleria extends Activity {
         appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
         General.manageBackgroundMusic(isSoundActive);
+        startLightsAnimation(findViewById(R.id.backLightBatidora));
+        startLightsAnimation(findViewById(R.id.backLightRegistradora));
 
         if (isSoundActive) {
             sonido.setImageResource(R.drawable.btn_sonido_on);
@@ -123,6 +128,15 @@ public class Pasteleria extends Activity {
 
 
 
+    }
+
+    public void startLightsAnimation(View mStartButtonLights) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mStartButtonLights, "rotation", 0f, 360f);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setDuration(6000);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        mStartButtonLights.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        animator.start();
     }
 
     @Override

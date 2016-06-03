@@ -6,6 +6,7 @@ import android.content.ClipDescription;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -130,7 +131,8 @@ public class EntregarVuelto extends Activity {
         if(!(saldo>0)){
             Toast.makeText(EntregarVuelto.this, "Felicidades! Has entregado el cambio correctamente", Toast.LENGTH_SHORT).show();
             Handler h = new Handler();
-
+            General general = null;
+            Sonidos(R.raw.gamewin);
             animatedCongrats.setVisibility(View.VISIBLE);
             anim.setVisible(true, true);
 
@@ -342,5 +344,21 @@ public class EntregarVuelto extends Activity {
 
             return true;
         }
+    }
+    public void Sonidos(int Sonido){
+
+        MediaPlayer mp = MediaPlayer.create(this, Sonido);
+
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.reset();
+                mp.release();
+                mp = null;
+            }
+
+        });
+        mp.start();
+
     }
 }

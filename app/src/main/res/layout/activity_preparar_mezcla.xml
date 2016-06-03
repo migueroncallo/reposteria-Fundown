@@ -25,10 +25,10 @@
         android:layout_height="100dp"
         android:id="@+id/harinaImage"
         android:src="@drawable/harina"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="50dp"
          />
 
     <ImageView
@@ -36,40 +36,40 @@
         android:layout_height="100dp"
         android:id="@+id/mantequillarImage"
         android:src="@drawable/mantequilla"
-        android:layout_below="@+id/harinaImage"
-        android:layout_marginTop="58dp"
-        android:layout_marginRight="40dp"
-
-        android:layout_alignParentRight="true"/>
+        android:layout_toRightOf="@+id/harinaImage"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="150dp"
+        android:layout_alignParentBottom="true"/>
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/huevoImage"
         android:src="@drawable/huevo"
-        android:layout_below="@+id/mantequillarImage"
-        android:layout_marginTop="58dp"
-        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@+id/mantequillarImage"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="150dp"
 
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentBottom="true"/>
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/aguaImage"
         android:src="@drawable/agua"
-        android:layout_below="@+id/huevoImage"
-        android:layout_marginTop="58dp"
-        android:layout_marginRight="40dp"
+        android:layout_toRightOf="@+id/huevoImage"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="150dp"
 
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentBottom="true"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tazonImage"
         android:src="@drawable/tazon"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="250dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -78,11 +78,11 @@
         android:textSize="50dp"
         android:text="1"
         android:id="@+id/harinaCount"
-        android:layout_marginRight="20dp"
         android:textColor="#ffffff"
-        android:layout_alignBottom="@+id/harinaImage"
-        android:layout_toLeftOf="@+id/harinaImage"
-        android:layout_toStartOf="@+id/harinaImage" />
+        android:layout_marginLeft="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,33 +90,31 @@
         android:textSize="50dp"
         android:text="2"
         android:id="@+id/mantequillaCount"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="100dp"
         android:textColor="#ffffff"
         android:layout_alignBottom="@+id/mantequillarImage"
-        android:layout_toLeftOf="@+id/mantequillarImage"
-        android:layout_toStartOf="@+id/mantequillarImage" />
+        android:layout_toRightOf="@+id/harinaImage"
+         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:text="2"
         android:id="@+id/huevoCount"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="100dp"
         android:textColor="#ffffff"
         android:layout_alignBottom="@+id/huevoImage"
-        android:layout_toLeftOf="@+id/huevoImage"
-        android:layout_toStartOf="@+id/huevoImage" />
+        android:layout_toRightOf="@+id/mantequillarImage" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:text="3"
         android:id="@+id/aguaCount"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="100dp"
         android:textColor="#ffffff"
         android:layout_alignBottom="@+id/aguaImage"
-        android:layout_toLeftOf="@+id/aguaImage"
-        android:layout_toStartOf="@+id/aguaImage" />
+        android:layout_toRightOf="@+id/huevoImage" />
 
     <ImageView
         android:layout_width="600dp"

@@ -25,4 +25,6 @@ public class General {
             bgm.pause();
         }
     }
+
+
 }
