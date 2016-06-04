@@ -3,7 +3,6 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -25,7 +24,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.Random;
 
-public class PrepararMezcla extends Activity {
+public class PasteleriaPrepararMezcla extends Activity {
 
     TextView harina, mantequilla, huevo, agua;
     float posx = 0, posy = 0;
@@ -83,7 +82,7 @@ public class PrepararMezcla extends Activity {
         } else {
             sonido.setImageResource(R.drawable.btn_sonido_off);
         }
-//        Toast.makeText(PrepararMezcla.this,"Vamos a preparar un cupcake.", Toast.LENGTH_LONG).show();
+//        Toast.makeText(PasteleriaPrepararMezcla.this,"Vamos a preparar un cupcake.", Toast.LENGTH_LONG).show();
 
         activityHint();
 
@@ -92,7 +91,7 @@ public class PrepararMezcla extends Activity {
             @Override
             public void onClick(View v) {
 
-                appPreferences = PreferenceManager.getDefaultSharedPreferences(PrepararMezcla.this);
+                appPreferences = PreferenceManager.getDefaultSharedPreferences(PasteleriaPrepararMezcla.this);
                 boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
                 if (isSoundActive){
                     sonido.setImageResource(R.drawable.btn_sonido_off);
@@ -200,7 +199,7 @@ public class PrepararMezcla extends Activity {
 
         boolean finished = false;
         if (egg && water && flour && butter && !gameFinished && gameCount == 0) {
-//            Toast.makeText(PrepararMezcla.this, "Felicidades ya has completado la receta", Toast.LENGTH_LONG).show();
+//            Toast.makeText(PasteleriaPrepararMezcla.this, "Felicidades ya has completado la receta", Toast.LENGTH_LONG).show();
             huevoCount = 0;
             aguaCount = 0;
             harinaCount = 0;
@@ -266,7 +265,7 @@ public class PrepararMezcla extends Activity {
                     break;
             }
 
-//            Toast.makeText(PrepararMezcla.this, "Ahora vamos a preparar " + String.valueOf(multiplicador) + " cupcakes.", Toast.LENGTH_LONG).show();
+//            Toast.makeText(PasteleriaPrepararMezcla.this, "Ahora vamos a preparar " + String.valueOf(multiplicador) + " cupcakes.", Toast.LENGTH_LONG).show();
 
                 Handler h = new Handler();
 
@@ -306,7 +305,7 @@ public class PrepararMezcla extends Activity {
             tazon.setImageDrawable(res);
         } else {
             if (egg && water && flour && butter && gameFinished && (gameCount > 0)) {
-//                Toast.makeText(PrepararMezcla.this, "Felicidades has finalizado el juego!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(PasteleriaPrepararMezcla.this, "Felicidades has finalizado el juego!", Toast.LENGTH_LONG).show();
                 String uri = "@drawable/cupcakelisto";
 
                 int imageResource = getResources().getIdentifier(uri, null, getPackageName());
@@ -435,7 +434,7 @@ public class PrepararMezcla extends Activity {
 
                             } else {
                                 YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                Toast.makeText(PrepararMezcla.this, "Ya agregaste los huevos necesarios", Toast.LENGTH_LONG).show();
+                                Toast.makeText(PasteleriaPrepararMezcla.this, "Ya agregaste los huevos necesarios", Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -464,7 +463,7 @@ public class PrepararMezcla extends Activity {
 
                             } else {
                                 YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de agua necesaria", Toast.LENGTH_LONG).show();
+                                Toast.makeText(PasteleriaPrepararMezcla.this, "Ya agregaste la cantidad de agua necesaria", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -494,7 +493,7 @@ public class PrepararMezcla extends Activity {
 
                             } else {
                                 YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de harina necesaria", Toast.LENGTH_LONG).show();
+                                Toast.makeText(PasteleriaPrepararMezcla.this, "Ya agregaste la cantidad de harina necesaria", Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -526,7 +525,7 @@ public class PrepararMezcla extends Activity {
 
                             } else {
                                 YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                Toast.makeText(PrepararMezcla.this, "Ya agregaste la cantidad de mantequilla necesaria", Toast.LENGTH_LONG).show();
+                                Toast.makeText(PasteleriaPrepararMezcla.this, "Ya agregaste la cantidad de mantequilla necesaria", Toast.LENGTH_LONG).show();
                             }
 
                         }

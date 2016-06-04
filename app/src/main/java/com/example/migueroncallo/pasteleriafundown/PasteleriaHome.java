@@ -3,12 +3,8 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
@@ -20,12 +16,8 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
-public class Pasteleria extends Activity {
+public class PasteleriaHome extends Activity {
 
     ImageView imageView, batidora, registradora;
     ImageButton sonido, home;
@@ -78,7 +70,7 @@ public class Pasteleria extends Activity {
         sonido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appPreferences = PreferenceManager.getDefaultSharedPreferences(Pasteleria.this);
+                appPreferences = PreferenceManager.getDefaultSharedPreferences(PasteleriaHome.this);
                 boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
                 if (isSoundActive){
                     sonido.setImageResource(R.drawable.btn_sonido_off);
@@ -107,7 +99,7 @@ public class Pasteleria extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Pasteleria.this, PrepararMezcla.class);
+                Intent intent = new Intent(PasteleriaHome.this, PasteleriaPrepararMezcla.class);
                 startActivity(intent);
 
             }
@@ -116,7 +108,7 @@ public class Pasteleria extends Activity {
         registradora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Pasteleria.this, VenderCupcake.class);
+                Intent intent = new Intent(PasteleriaHome.this, PasteleriaVenderCupcake.class);
                 startActivity(intent);
             }
         });

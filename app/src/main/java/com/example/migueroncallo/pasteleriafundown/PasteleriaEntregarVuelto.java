@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-public class EntregarVuelto extends Activity {
+public class PasteleriaEntregarVuelto extends Activity {
 
     SharedPreferences preferences, appPreferences;
     int venta,saldo;
@@ -72,7 +72,7 @@ public class EntregarVuelto extends Activity {
             @Override
             public void onClick(View v) {
 
-                appPreferences = PreferenceManager.getDefaultSharedPreferences(EntregarVuelto.this);
+                appPreferences = PreferenceManager.getDefaultSharedPreferences(PasteleriaEntregarVuelto.this);
                 boolean isSoundActive = appPreferences.getBoolean("isSoundActive", false);
                 if (isSoundActive){
                     sonido.setImageResource(R.drawable.btn_sonido_off);
@@ -129,7 +129,7 @@ public class EntregarVuelto extends Activity {
 
     public void checkSaldo(int saldo){
         if(!(saldo>0)){
-            Toast.makeText(EntregarVuelto.this, "Felicidades! Has entregado el cambio correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasteleriaEntregarVuelto.this, "Felicidades! Has entregado el cambio correctamente", Toast.LENGTH_SHORT).show();
             Handler h = new Handler();
             General general = null;
             Sonidos(R.raw.gamewin);
@@ -303,7 +303,7 @@ public class EntregarVuelto extends Activity {
                                     assignValueCaja(saldo);
                                 }else{
                                     YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                    Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PasteleriaEntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
 
                                 break;
@@ -314,7 +314,7 @@ public class EntregarVuelto extends Activity {
                                     assignValueCaja(saldo);
                                 }else{
                                     YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                    Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PasteleriaEntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
 
                                 break;
@@ -324,7 +324,7 @@ public class EntregarVuelto extends Activity {
                                     assignValueCaja(saldo);
                                 }else{
                                     YoYo.with(Techniques.Wobble).duration(2000).playOn(view);
-                                    Toast.makeText(EntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PasteleriaEntregarVuelto.this, "Debes entregar menos dinero al cliente", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:break;

@@ -22,15 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Pasteleria"
+            android:name=".PasteleriaHome"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
         <activity
-            android:name=".PrepararMezcla"
+            android:name=".PasteleriaPrepararMezcla"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
         <activity
-            android:name=".VenderCupcake"
+            android:name=".PasteleriaVenderCupcake"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
 

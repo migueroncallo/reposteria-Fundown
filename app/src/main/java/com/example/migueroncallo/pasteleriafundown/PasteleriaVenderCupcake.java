@@ -3,7 +3,6 @@ package com.example.migueroncallo.pasteleriafundown;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-public class VenderCupcake extends Activity {
+public class PasteleriaVenderCupcake extends Activity {
 
     ImageView cupcakeVenta, pago;
     SharedPreferences preferences;
@@ -39,7 +38,7 @@ public class VenderCupcake extends Activity {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(VenderCupcake.this, EntregarVuelto.class);
+                Intent intent = new Intent(PasteleriaVenderCupcake.this, PasteleriaEntregarVuelto.class);
                 startActivity(intent);
                 finish();
             }
